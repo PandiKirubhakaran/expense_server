@@ -15,7 +15,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors({
-  origin: 'http://localhost:5173', // Your frontend's URL
+  origin: 'https://expense-3rd16mqga-pandi-kirubhakaran-es-projects.vercel.app/login', // Your frontend's URL
   credentials: true, // Allow credentials (cookies)
 }));
 app.use(cookieParser());
