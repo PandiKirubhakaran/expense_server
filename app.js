@@ -15,8 +15,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors({
-  // origin: 'https://expense-3rd16mqga-pandi-kirubhakaran-es-projects.vercel.app', // Your frontend's URL
-  origin: 'https://expense-3smqmu4nt-pandi-kirubhakaran-es-projects.vercel.app/' || 'https://expense-ui-swart.vercel.app/', // Your frontend's URL
+  origin:'https://expense-ui-swart.vercel.app/',
   credentials: true, // Allow credentials (cookies)
 }));
 app.use(cookieParser());
