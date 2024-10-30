@@ -6,29 +6,36 @@ const cookieParser = require('cookie-parser');
 const authRoutes = require('./routes/authRoutes');
 const expenseRoutes = require('./routes/expenseRoutes');
 const capitalRoutes = require('./routes/dashboardRoutes');
+const connectDB = require('./config/db');
 
-// Load env vars
+// Load environment variables
 dotenv.config();
 
 const app = express();
 
 // Middleware
 app.use(express.json());
+app.use(cookieParser());
+
+// CORS configuration
 app.use(cors({
-  origin:'https://expense-ui-swart.vercel.app/',
+  origin: 'https://expense-ui-swart.vercel.app', // Make sure this matches exactly with your frontend URL
   credentials: true, // Allow credentials (cookies)
 }));
-app.use(cookieParser());
 
 // Routes
 app.use('/api/auth', authRoutes);
-// Use routes
 app.use('/api', expenseRoutes);
 app.use('/api', capitalRoutes);
 
-// MongoDB connection
-const connectDB = require('./config/db');
-connectDB();
+// Connect to MongoDB
+connectDB()
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch((err) => {
+    console.error('MongoDB connection error:', err);
+  });
 
 // Start server
 const PORT = process.env.PORT || 5000;
